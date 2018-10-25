@@ -23,8 +23,22 @@
     "mysql": "^2.4.2",
 
     "request": "^2.69.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "sequelize": "^3.33.0",
+    "jest": {
+      "setupTestFrameworkScriptFile": "jest-enzyme",
+      "testEnvironment": "enzyme",
+      "testEnvironmentOptions": {
+        "enzymeAdapter": "react16"
+      }
+    }
+=======
+=======
+>>>>>>> 503aacd93ce286271eb52e02d72d2f0f8b47f84b
 
     "sequelize": "^3.33.0"
+>>>>>>> 503aacd93ce286271eb52e02d72d2f0f8b47f84b
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
