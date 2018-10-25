@@ -1,27 +1,20 @@
-CREATE DATABASE availability;
+CREATE DATABASE IF NOT EXISTS availability;
 
-USE bookings;
+USE availability;
 
 CREATE TABLE rooms (
-  /* Describe your table here.*/
-
-  id int NOT NULL AUTO_INCREMENT,
-  defaultsToAvailable BOOLEAN NOT NULL,
-  updatedAt DATE NOT NULL,
-  minimumStay INT,
-  PRIMARY KEY (ID)
+  room_id INT NOT NULL AUTO_INCREMENT,
+  defaults_to_available BOOLEAN NOT NULL,
+  updated_at DATE NOT NULL,
+  minimum_stay INT,
+  PRIMARY KEY (room_id)
 );
 
-/* Create other tables and define schemas for them here! */
-
-/*
-how to add room_id as foreign key
-*/
-
 CREATE TABLE bookings (
-  id        int    NOT NULL AUTO_INCREMENT,
-  checkIn   DATE   NOT NULL,
-  checkOut  DATE   NOT NULL,
-  room_id 
-  PRIMARY KEY (ID)
+  booking_id  INT    NOT NULL AUTO_INCREMENT,
+  check_in     DATE   NOT NULL,
+  check_out    DATE   NOT NULL,
+  room_id     INT,
+  PRIMARY KEY (booking_id),
+  FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
