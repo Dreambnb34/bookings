@@ -7,13 +7,23 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
+
+  "scripts": {
+    "test": "jest --coverage"
+  },
+
+  "scripts": {
+    "test": "jest --coverage"
+  },
+
   "dependencies": {
     "body-parser": "^1.9.2",
     "express": "^4.10.1",
     "morgan": "^1.4.1",
     "mysql": "^2.4.2",
+
     "request": "^2.69.0",
+<<<<<<< HEAD
     "sequelize": "^3.33.0",
     "jest": {
       "setupTestFrameworkScriptFile": "jest-enzyme",
@@ -22,6 +32,10 @@
         "enzymeAdapter": "react16"
       }
     }
+=======
+
+    "sequelize": "^3.33.0"
+>>>>>>> 503aacd93ce286271eb52e02d72d2f0f8b47f84b
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"

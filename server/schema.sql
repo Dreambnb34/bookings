@@ -14,11 +14,14 @@ CREATE TABLE rooms (
 
 /* Create other tables and define schemas for them here! */
 
+/*
+how to add room_id as foreign key
+*/
 
 CREATE TABLE bookings (
   id        int    NOT NULL AUTO_INCREMENT,
   checkIn   DATE   NOT NULL,
   checkOut  DATE   NOT NULL,
-  room_id
+  room_id 
   PRIMARY KEY (ID)
 );
