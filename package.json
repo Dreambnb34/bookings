@@ -18,11 +18,15 @@
     "knex": "^0.15.2",
     "morgan": "^1.4.1",
     "mysql": "^2.16.0",
-    "request": "^2.69.0",
-    "sequelize": "^3.33.0"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.3",
     "webpack-cli": "^3.1.2"
   }
 }
