@@ -1,11 +1,34 @@
 const path = require('path');
-const webpack = require('webpack-cli');
+
+const SRC_DIR = path.join(__dirname, '/client/src');
+const DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
-    mode: 'development',
-    entry: './index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
-    }
-}
+  entry: `${SRC_DIR}/index.jsx`,
+  output: {
+    filename: 'bundle.js',
+    path: DIST_DIR,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        include: SRC_DIR,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+        },
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  mode: 'development',
+  devServer: {
+    contentBase: path.join(__dirname, 'public/'),
+    port: 3000,
+    publicPath: 'http://localhost:3000/dist/',
+    hotOnly: true,
+  },
+};
