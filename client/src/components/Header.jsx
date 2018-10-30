@@ -18,6 +18,7 @@ class Header extends React.Component {
           {this.state.minimumStay} night minimum stay
         </p>
         <p data-testid="updated-at">Updated {this.state.updatedAt} days ago</p>
+        <button data-testid="clear-all">Clear All</button>
       </div>
     );
   }
