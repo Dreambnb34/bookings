@@ -1,3 +1,4 @@
+// const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
@@ -15,8 +16,8 @@ module.exports = {
         test: /\.jsx?/,
         include: SRC_DIR,
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
+        query: {
+          presets: ['react', 'env'],
         },
       },
     ],
@@ -27,7 +28,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
-    port: 3000,
+    port: 3030,
     publicPath: 'http://localhost:3000/dist/',
     hotOnly: true,
   },
