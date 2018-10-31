@@ -45,7 +45,7 @@ class DateCell extends React.Component {
 
   render() {
     if (this.props.isEmpty) {
-      return <td className="empty-calendar-day">{this.props.date}</td>;
+      return <td className="empty-calendar-day" />;
     } else if (this.props.unavailable) {
       return <td className="unavailable-calendar-day">{this.props.date}</td>;
     } else if (this.props.available && this.props.selected === false) {

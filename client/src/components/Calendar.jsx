@@ -7,23 +7,42 @@ class Calendar extends React.Component {
     this.state = {
       oneSelected: false,
       dateSelected: undefined,
+      leftMount: undefined,
+      month: 0,
+      year: 0,
     };
 
     this.updateCalendar = this.updateCalendar.bind(this);
+    this.incrementMonth = this.incrementMonth.bind(this);
+    this.decrementMonth = this.decrementMonth.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      month: this.props.month,
+      year: this.props.year,
+    });
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      month: this.props.month,
+      year: this.props.year,
+    });
   }
 
   firstDay() {
-    const { year, month } = this.props;
+    const { year, month } = this.state;
     return new Date(year, month, 1).getDay();
   }
 
   daysInMonth() {
-    const { year, month } = this.props;
+    const { year, month } = this.state;
     return 32 - new Date(year, month, 32).getDate();
   }
 
   renderHeader() {
-    const month = this.props.month;
+    const month = this.state.month;
     const MONTHS = [
       'January',
       'February',
@@ -96,14 +115,53 @@ class Calendar extends React.Component {
 
     return [weeks];
   }
+  incrementMonth() {
+    this.setState({
+      month: this.state.month + 1,
+    });
+  }
+
+  decrementMonth() {
+    this.setState({
+      month: this.state.month - 1,
+    });
+  }
+
+  renderLeftButton() {
+    if (this.props.leftMount) {
+      return (
+        <button className="left-button" onClick={this.props.updateMonth}>
+          left
+        </button>
+      );
+    } else {
+      return <span />;
+    }
+  }
+
+  renderRightButton() {
+    if (this.props.leftMount === false) {
+      return (
+        <button className="right-button" onClick={this.props.updateMonth}>
+          right
+        </button>
+      );
+    } else {
+      return <span />;
+    }
+  }
 
   render() {
     let dates = this.renderDates();
     let header = this.renderHeader();
     return (
       <div className="calendar-container">
+        <div role="button">
+          {this.renderLeftButton()}
+          {this.renderRightButton()}
+        </div>
         <h3 className="calendar-header">{header}</h3>
-        <table>
+        <table className="calendar-table">
           <th>Su</th>
           <th>Mo</th>
           <th>Tu</th>
