@@ -4,20 +4,15 @@ import ReactDOM from 'react-dom';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      minimumStay: 3,
-      updatedAt: 10,
-    };
   }
 
   render() {
+    const {minimumStay, updatedAt} = this.props;
     return (
       <div>
         <h2>Availability</h2>
-        <p data-testid="minimum-stay">
-          {this.state.minimumStay} night minimum stay
-        </p>
-        <p data-testid="updated-at">Updated {this.state.updatedAt} days ago</p>
+        <p data-testid="minimum-stay">{minimumStay} night minimum stay</p>
+        <p data-testid="updated-at">Updated {updatedAt} days ago</p>
         <button data-testid="clear-all">Clear All</button>
       </div>
     );

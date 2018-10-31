@@ -4,11 +4,17 @@ import DateCell from './Date';
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      oneSelected: false,
+      dateSelected: undefined,
+    };
+
+    this.updateCalendar = this.updateCalendar.bind(this);
   }
 
   firstDay() {
     const { year, month } = this.props;
-    return 32 - new Date(year, month, 1).getDay();
+    return new Date(year, month, 1).getDay();
   }
 
   daysInMonth() {
@@ -34,6 +40,18 @@ class Calendar extends React.Component {
     ];
     const monthName = MONTHS[month];
     return monthName;
+  }
+
+  updateCalendar(boolean) {
+    this.setState({
+      oneSelected: JSON.parse(boolean),
+    });
+  }
+
+  updateDateSelected(key) {
+    this.setState({
+      dateSelected: key,
+    });
   }
 
   renderDates() {
@@ -71,6 +89,8 @@ class Calendar extends React.Component {
               selected={false}
               key={'' + indW + indD}
               date={days}
+              updateCalendar={this.updateCalendar}
+              updateDateSelected={this.updateDateSelected.bind(this)}
             />,
           );
           days += 1;
@@ -91,8 +111,15 @@ class Calendar extends React.Component {
     let header = this.renderHeader();
     return (
       <div className="calendar-container">
-        <div className="calendar-header">{header}</div>
+        <h3 className="calendar-header">{header}</h3>
         <table>
+          <th>Su</th>
+          <th>Mo</th>
+          <th>Tu</th>
+          <th>We</th>
+          <th>Th</th>
+          <th>Fr</th>
+          <th>Sa</th>
           <tbody>{dates}</tbody>
         </table>
       </div>
