@@ -2,6 +2,24 @@ import React from 'react';
 import {render} from 'react-testing-library';
 import Header from '../components/Header.jsx';
 
+// describe('Main Header', () => {
+//   test('props are defined', () => {
+//     const props = {
+//       minimumStay: 3,
+//       updatedAt: 10,
+//     };
+//     console.log(props);
+//     const {getByText} = render(<Header {...props} />);
+
+//     const minimumStayProp = getByText(props.minimumStay);
+//     const updatedAtProp = getByText(props.updatedAt);
+
+//     //expect(minimumStayProp).toBeDefined();
+//     expect(updatedAtProp).toBeGreaterThan(2);
+//     expect(minimumStayProp).toBeGreaterThan(2);
+//   });
+// });
+
 it('has associated functions', () => {
   const {getByTestId} = render(<Header />);
   const minimumAvailabilityParagraph = getByTestId('minimum-stay');
