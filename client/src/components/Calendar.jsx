@@ -60,18 +60,6 @@ class Calendar extends React.Component {
     const numOfWeeks = [0, 1, 2, 3, 4, 5];
     const numOfDays = [0, 1, 2, 3, 4, 5, 6];
 
-    //   const datesToMap = [];
-    //   for (let i = 0; i < daysInMonth; i += 1) {
-    //     datesToMap.push(i);
-    //   }
-
-    //   const mappedDates = datesToMap.map((day, index) => {
-    //     if (index)
-    //     return (
-    //     <DateCell date={day} key={day} />
-    //   )
-    // });
-    //   return mappedDates;
     let days = 1;
 
     const weeks = numOfWeeks.map((week, indW) => {
@@ -87,6 +75,9 @@ class Calendar extends React.Component {
             <DateCell
               available={true}
               selected={false}
+              dateSelected={
+                this.state.dateSelected ? this.state.dateSelected : 32
+              }
               key={'' + indW + indD}
               date={days}
               updateCalendar={this.updateCalendar}
