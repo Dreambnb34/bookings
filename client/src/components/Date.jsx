@@ -29,6 +29,11 @@ class DateCell extends React.Component {
   renderClass() {
     if (this.state.selected) {
       return 'available-selected-calendar-day';
+    } else if (
+      this.props.dateSelected < 32 &&
+      this.props.date < this.props.dateSelected
+    ) {
+      return 'unavailable-calendar-day';
     } else if (this.state.hover && this.state.selected === false) {
       return 'hover-unselected-calendar-day';
     } else if (this.state.hover && this.state.selected) {
