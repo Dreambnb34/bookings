@@ -27,12 +27,35 @@ class DateCell extends React.Component {
   }
 
   renderClass() {
-    if (this.state.selected) {
-      return 'available-selected-calendar-day';
+    //currently O(n), but if you pass an object as probs it can be O(1)
+    // if (this.props.bookings.includes(this.props.date)) {
+    //   return 'unavailable-calendar-day';
+    // }
+
+    const isBooked = (date, min, bookings) => {
+      if (date && min && bookings) {
+        for (let i = 0; i < bookings.length; i++) {
+          for (let j = 0; j < min; j++) {
+            if (date === bookings[i] + j) {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    };
+
+    if (
+      isBooked(this.props.date, this.props.minimum_stay, this.props.bookings)
+    ) {
+      return 'unavailable-calendar-day';
     } else if (
       this.props.dateSelected < 32 &&
       this.props.date < this.props.dateSelected
     ) {
+      return 'unavailable-calendar-day';
+    } else if (this.props.dateObj < new Date()) {
       return 'unavailable-calendar-day';
     } else if (this.state.hover && this.state.selected === false) {
       return 'hover-unselected-calendar-day';

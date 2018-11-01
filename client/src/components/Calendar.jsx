@@ -1,5 +1,6 @@
 import React from 'react';
 import DateCell from './Date';
+import axios from 'axios';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -101,6 +102,9 @@ class Calendar extends React.Component {
               date={days}
               updateCalendar={this.updateCalendar}
               updateDateSelected={this.updateDateSelected.bind(this)}
+              dateObj={new Date(this.props.year, this.props.month, days)}
+              bookings={this.props.bookings}
+              minimum_stay={this.props.minimum_stay}
             />,
           );
           days += 1;
@@ -130,7 +134,10 @@ class Calendar extends React.Component {
   renderLeftButton() {
     if (this.props.leftMount) {
       return (
-        <button className="left-button" onClick={this.props.updateMonth}>
+        <button
+          className="left-button"
+          onClick={() => this.props.updateMonth()}
+        >
           left
         </button>
       );
@@ -142,7 +149,10 @@ class Calendar extends React.Component {
   renderRightButton() {
     if (this.props.leftMount === false) {
       return (
-        <button className="right-button" onClick={this.props.updateMonth}>
+        <button
+          className="right-button"
+          onClick={() => this.props.updateMonth()}
+        >
           right
         </button>
       );
@@ -160,7 +170,9 @@ class Calendar extends React.Component {
           {this.renderLeftButton()}
           {this.renderRightButton()}
         </div>
-        <h3 className="calendar-header">{header}</h3>
+        <h3 className="calendar-header">
+          {header} {this.state.year}
+        </h3>
         <table className="calendar-table">
           <th>Su</th>
           <th>Mo</th>

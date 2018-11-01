@@ -10,7 +10,8 @@ const port = 3000;
 app
   .use(bodyParser.json())
   .use(morgan('dev'))
-  .use(express.static(path.join(__dirname, '../client/dist')))
+  .use('/rooms', express.static(path.join(__dirname, '../client/dist')))
+  .use('/rooms', routes)
   .use('/', routes);
 
 app.listen(port, () => {
