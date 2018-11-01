@@ -1,14 +1,18 @@
 const express = require('express');
+const path = require('path');
+
 const controller = require('./controller');
 const router = express.Router();
 
 // define the home page route
-router.get('/', (req, res) => {
+router.get('/:roomId', (req, res) => {
   console.log('getting');
-  res.send('Hello!!');
+  res.sendFile('index.html', {
+    root: path.join(__dirname, '../client/dist'),
+  });
 });
 
-// define a test route
+// define a route to grab all bookings for a room
 router.get('/api/rooms/:roomId', (req, res) => {
   const { roomId } = req.params;
   controller
@@ -26,7 +30,7 @@ router.get('/api/rooms/:roomId', (req, res) => {
           length_of_stay: booking.length_of_stay,
           booking_id: booking.booking_id,
         };
-        sendToClient.push(booking);
+        sendToClient.push(clientObj);
       });
       return Promise.all(sendToClient);
     })
