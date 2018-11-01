@@ -136,7 +136,10 @@ class Calendar extends React.Component {
       return (
         <button
           className="left-button"
-          onClick={() => this.props.updateMonth()}
+          onClick={() => {
+            this.props.updateMonth();
+            this.props.getBookings();
+          }}
         >
           left
         </button>
@@ -151,7 +154,10 @@ class Calendar extends React.Component {
       return (
         <button
           className="right-button"
-          onClick={() => this.props.updateMonth()}
+          onClick={() => {
+            this.props.updateMonth();
+            this.props.getBookings();
+          }}
         >
           right
         </button>

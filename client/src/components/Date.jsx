@@ -35,7 +35,8 @@ class DateCell extends React.Component {
     const isBooked = (date, min, bookings) => {
       if (date && min && bookings) {
         for (let i = 0; i < bookings.length; i++) {
-          for (let j = 0; j < min; j++) {
+          let r = Math.floor(Math.random() * 3);
+          for (let j = 0; j < min + r; j++) {
             if (date === bookings[i] + j) {
               return true;
             }
