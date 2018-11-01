@@ -10,9 +10,30 @@ router.get('/', (req, res) => {
 
 // define a test route
 router.get('/api/rooms/:roomId', (req, res) => {
-  let id = req.params.roomId;
-  console.log(parms);
-  res.send('Testing Testing 123');
+  const { roomId } = req.params;
+  controller
+    .selectBookingsById(roomId)
+    .then(data => {
+      console.log(data);
+      return data;
+    })
+    .then(bookings => {
+      // construct object to send client
+      const sendToClient = [];
+      bookings.forEach(booking => {
+        let clientObj = {
+          check_in: booking.check_in,
+          length_of_stay: booking.length_of_stay,
+          booking_id: booking.booking_id,
+        };
+        sendToClient.push(booking);
+      });
+      return Promise.all(sendToClient);
+    })
+    .then(clientObjects => {
+      res.send(clientObjects);
+      console.log('yay');
+    });
 });
 
 module.exports = router;
