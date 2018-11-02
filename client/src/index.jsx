@@ -20,9 +20,15 @@ class App extends React.Component {
 
     this.incrementMonth = this.incrementMonth.bind(this);
     this.decrementMonth = this.decrementMonth.bind(this);
+    this.getBookings = this.getBookings.bind(this);
+    this.sortBookings = this.sortBookings.bind(this);
   }
 
   componentDidMount() {
+    this.getBookings();
+  }
+
+  getBookings() {
     let id = Number(window.location.href.split('/')[4]);
     axios.get(`/api/rooms/${id}`).then(data => {
       console.log(data);
@@ -53,7 +59,6 @@ class App extends React.Component {
 
     right = right.map(b => new Date(b.check_in).getDate());
 
-    console.log('alksdjfla;ksdfj;laskdfj');
     this.setState({
       updated_: updated_at,
       minimum_stay: minimum_stay,
@@ -86,14 +91,14 @@ class App extends React.Component {
   decrementMonth() {
     if (this.state.rightMonth === 1) {
       this.setState({
-        rightMonth: 12,
+        rightMonth: 11,
         rightYear: this.state.rightYear - 1,
         leftMonth: this.state.leftMonth - 1,
       });
     } else if (this.state.leftMonth === 1) {
       this.setState({
         rightMonth: this.state.rightMonth - 1,
-        leftMonth: 12,
+        leftMonth: 11,
         leftYear: this.state.leftYear - 1,
       });
     } else {
@@ -118,6 +123,7 @@ class App extends React.Component {
           updateMonth={this.decrementMonth}
           bookings={this.state.leftBookings}
           minimum_stay={this.state.minimum_stay}
+          getBookings={this.getBookings}
         />
         <Calendar
           leftMount={false}
@@ -126,6 +132,7 @@ class App extends React.Component {
           updateMonth={this.incrementMonth}
           bookings={this.state.rightBookings}
           minimum_stay={this.state.minimum_stay}
+          getBookings={this.getBookings}
         />
       </div>
     );
