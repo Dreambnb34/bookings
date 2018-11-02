@@ -16,12 +16,21 @@ class App extends React.Component {
       rightBookings: undefined,
       minimum_stay: undefined,
       updated_at: undefined,
+      oneSelected: false,
+      dateIsSelected: false,
+      dateSelectedIsHovered: false,
+      selectedDate1: undefined,
+      selectedDate2: undefined,
+      selectedSide1: undefined,
+      selectedSide2: undefined,
     };
 
     this.incrementMonth = this.incrementMonth.bind(this);
     this.decrementMonth = this.decrementMonth.bind(this);
     this.getBookings = this.getBookings.bind(this);
     this.sortBookings = this.sortBookings.bind(this);
+    this.incrementSelectedDate = this.incrementSelectedDate.bind(this);
+    this.date1Clicked = this.date1Clicked.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +40,6 @@ class App extends React.Component {
   getBookings() {
     let id = Number(window.location.href.split('/')[4]);
     axios.get(`/api/rooms/${id}`).then(data => {
-      console.log(data);
       this.sortBookings(data);
     });
   }
@@ -64,6 +72,8 @@ class App extends React.Component {
       minimum_stay: minimum_stay,
       leftBookings: left,
       rightBookings: right,
+      oneSelected: false,
+      dateSelected: undefined,
     });
   }
 
@@ -109,10 +119,38 @@ class App extends React.Component {
     }
   }
 
+  incrementSelectedDate(side, date, isHovered, isSelected) {
+    let isLeft = side;
+
+    if (isLeft) {
+      this.setState({
+        selectedDate1: date,
+        selectedSide1: 'left',
+        dateSelectedIsHovered: isHovered,
+        dateIsSelected: isSelected,
+      });
+    } else {
+      this.setState({
+        selectedDate1: date,
+        selectedSide1: 'right',
+        dateSelectedIsHovered: isHovered,
+        dateIsSelected: isSelected,
+      });
+    }
+  }
+
+  date1Clicked() {
+    this.setState({
+      dateIsSelected: !this.state.dateIsSelected,
+      dateSelectedIsHovered: !this.state.dateSelectedIsHovered,
+    });
+  }
+
   render() {
     return (
       <div className="xl-calendar-container">
         <Header
+          getBookings={this.getBookings}
           minimum_stay={this.state.minimum_stay}
           created_at={this.state.created_at}
         />
@@ -124,6 +162,11 @@ class App extends React.Component {
           bookings={this.state.leftBookings}
           minimum_stay={this.state.minimum_stay}
           getBookings={this.getBookings}
+          oneSelected={this.state.oneSelected}
+          dateSelected={this.state.dateSelected}
+          incrementSelectedDate={this.incrementSelectedDate}
+          dateSelectedIsHovered={this.state.dateSelectedIsHovered}
+          date1Clicked={this.date1Clicked}
         />
         <Calendar
           leftMount={false}
@@ -133,6 +176,11 @@ class App extends React.Component {
           bookings={this.state.rightBookings}
           minimum_stay={this.state.minimum_stay}
           getBookings={this.getBookings}
+          oneSelected={false}
+          dateSelected={undefined}
+          incrementSelectedDate={this.incrementSelectedDate}
+          dateSelectedIsHovered={this.state.dateSelectedIsHovered}
+          date1Clicked={this.date1Clicked}
         />
       </div>
     );

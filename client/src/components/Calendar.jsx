@@ -6,16 +6,20 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      oneSelected: false,
-      dateSelected: undefined,
+      oneSelected: this.props.oneSelected,
+      dateSelected: this.props.dateSelected,
       leftMount: undefined,
       month: 0,
       year: 0,
+      dateSelectedIsHovered: false,
     };
 
     this.updateCalendar = this.updateCalendar.bind(this);
     this.incrementMonth = this.incrementMonth.bind(this);
     this.decrementMonth = this.decrementMonth.bind(this);
+    this.updateDateSelectedIsHovered = this.updateDateSelectedIsHovered.bind(
+      this,
+    );
   }
 
   componentDidMount() {
@@ -62,16 +66,45 @@ class Calendar extends React.Component {
     return monthName;
   }
 
-  updateCalendar(boolean) {
-    this.setState({
-      oneSelected: JSON.parse(boolean),
-    });
+  updateCalendar(boolean, date) {
+    if (this.state.dateSelected) {
+      this.setState({
+        oneSelected: JSON.parse(boolean),
+        dateSelected: !date,
+      });
+    } else {
+      this.setState({
+        oneSelected: JSON.parse(boolean),
+        dateSelected: date,
+      });
+
+      // this.props.incrementSelectedDate(
+      //   this.props.leftMount,
+      //   this.state.dateSelected,
+      // );
+    }
   }
 
   updateDateSelected(key) {
     this.setState({
       dateSelected: key,
     });
+  }
+
+  updateDateSelectedIsHovered(date, boolean) {
+    if (date && date === this.state.dateSelected) {
+      console.log('double equals!!');
+
+      this.setState({
+        updateDateSelectedIsHovered: boolean,
+      });
+      this.props.incrementSelectedDate(
+        this.props.leftMount,
+        this.state.dateSelected,
+        boolean,
+        this.state.oneSelected,
+      );
+    }
   }
 
   renderDates() {
@@ -101,10 +134,15 @@ class Calendar extends React.Component {
               key={'' + indW + indD}
               date={days}
               updateCalendar={this.updateCalendar}
-              updateDateSelected={this.updateDateSelected.bind(this)}
+              updateDateSelected={() => {
+                this.updateDateSelected.bind(this);
+              }}
               dateObj={new Date(this.props.year, this.props.month, days)}
               bookings={this.props.bookings}
               minimum_stay={this.props.minimum_stay}
+              updateDateSelectedIsHovered={this.updateDateSelectedIsHovered}
+              dateSelectedIsHovered={this.props.dateSelectedIsHovered}
+              date1Clicked={this.props.date1Clicked}
             />,
           );
           days += 1;
@@ -119,6 +157,7 @@ class Calendar extends React.Component {
 
     return [weeks];
   }
+
   incrementMonth() {
     this.setState({
       month: this.state.month + 1,
@@ -135,7 +174,7 @@ class Calendar extends React.Component {
     if (this.props.leftMount) {
       return (
         <button
-          className="left-button"
+          id="left-button"
           onClick={() => {
             this.props.updateMonth();
             this.props.getBookings();
@@ -152,15 +191,15 @@ class Calendar extends React.Component {
   renderRightButton() {
     if (this.props.leftMount === false) {
       return (
-        <button
-          className="right-button"
+        <div
+          id="right-button-div"
           onClick={() => {
             this.props.updateMonth();
             this.props.getBookings();
           }}
         >
           right
-        </button>
+        </div>
       );
     } else {
       return <span />;
