@@ -91,14 +91,14 @@ class App extends React.Component {
   decrementMonth() {
     if (this.state.rightMonth === 1) {
       this.setState({
-        rightMonth: 12,
+        rightMonth: 11,
         rightYear: this.state.rightYear - 1,
         leftMonth: this.state.leftMonth - 1,
       });
     } else if (this.state.leftMonth === 1) {
       this.setState({
         rightMonth: this.state.rightMonth - 1,
-        leftMonth: 12,
+        leftMonth: 11,
         leftYear: this.state.leftYear - 1,
       });
     } else {
