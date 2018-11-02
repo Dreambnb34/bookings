@@ -12,6 +12,8 @@ class Calendar extends React.Component {
       month: 0,
       year: 0,
       dateSelectedIsHovered: false,
+      dateHovered: false,
+      secondSelected: undefined,
     };
 
     this.updateCalendar = this.updateCalendar.bind(this);
@@ -20,6 +22,8 @@ class Calendar extends React.Component {
     this.updateDateSelectedIsHovered = this.updateDateSelectedIsHovered.bind(
       this,
     );
+    this.updateDateHovered = this.updateDateHovered.bind(this);
+    this.updateSecondSelected = this.updateSecondSelected.bind(this);
   }
 
   componentDidMount() {
@@ -93,8 +97,6 @@ class Calendar extends React.Component {
 
   updateDateSelectedIsHovered(date, boolean) {
     if (date && date === this.state.dateSelected) {
-      console.log('double equals!!');
-
       this.setState({
         updateDateSelectedIsHovered: boolean,
       });
@@ -105,6 +107,18 @@ class Calendar extends React.Component {
         this.state.oneSelected,
       );
     }
+  }
+
+  updateDateHovered(dateOrFalse) {
+    this.setState({
+      dateHovered: dateOrFalse,
+    });
+  }
+
+  updateSecondSelected(date) {
+    this.setState({
+      secondSelected: date,
+    });
   }
 
   renderDates() {
@@ -143,6 +157,11 @@ class Calendar extends React.Component {
               updateDateSelectedIsHovered={this.updateDateSelectedIsHovered}
               dateSelectedIsHovered={this.props.dateSelectedIsHovered}
               date1Clicked={this.props.date1Clicked}
+              oneSelected={this.state.oneSelected}
+              dateHovered={this.state.dateHovered}
+              updateDateHovered={this.updateDateHovered}
+              secondSelected={this.state.secondSelected}
+              updateSecondSelected={this.updateSecondSelected}
             />,
           );
           days += 1;

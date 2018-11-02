@@ -8,20 +8,23 @@ class DateCell extends React.Component {
       selectedDate: undefined,
       hover: false,
       class: 'available-unselected-calendar-day',
+      secondSelected: undefined,
     };
   }
 
   onClick() {
-    console.log('clicked');
-    this.setState({
-      selected: !this.state.selected,
-      selectedDate: this.props.date,
-      class: 'available-selected-calendar-day',
-    });
+    if (!this.props.oneSelected) {
+      this.setState({
+        selected: !this.state.selected,
+        selectedDate: this.props.date,
+        class: 'available-selected-calendar-day',
+      });
+    } else if (this.props.oneSelected) {
+      this.props.updateSecondSelected(this.props.date);
+    }
   }
 
   hoverOn() {
-    console.log('should be hover');
     this.setState({ hover: true });
   }
 
@@ -58,36 +61,51 @@ class DateCell extends React.Component {
       // Date is selected (dark green for single, selected date)
     } else if (this.state.selected) {
       return 'available-selected-calendar-day';
-
-      // Date comes before the selected date
     } else if (
       this.props.dateSelected < 32 &&
       this.props.date < this.props.dateSelected
     ) {
       return 'unavailable-calendar-day';
 
-      // Date comes before today
+      // Date comes before today (unavailable)
     } else if (this.props.dateObj < new Date()) {
       return 'unavailable-calendar-day';
 
       // Date is hovered over when none are selected
-    } else if (this.state.hover && this.state.selected === false) {
+    } else if (
+      this.props.secondSelected &&
+      this.props.date <= this.props.secondSelected
+    ) {
+      console.log('in between all green');
+
+      if (this.props.date === this.props.secondSelected) {
+        return 'available-selected-calendar-day';
+      } else if (
+        this.props.date <= this.props.secondSelected &&
+        this.props.date >= this.props.dateSelected
+      ) {
+        return 'available-selected-calendar-day';
+      }
+    } else if (
+      this.state.hover &&
+      this.state.selected === false &&
+      !this.props.oneSelected
+    ) {
       return 'hover-unselected-calendar-day';
 
-      // Date is hovered over when one date is selected
-    } else if (this.state.hover && this.state.selected) {
+      // Date is hovered over when one is selected && date is less than minimum stay
+    } else if (
+      this.state.hover &&
+      this.state.selected &&
+      this.props.oneSelected
+    ) {
       return 'hover-selected-calendar-day';
 
-      // Date is
-    } else if (
-      this.state.selected &&
-      this.props.selectedDateIsHovered &&
-      this.props.date < this.props.minimum_stay + this.state.selectedDate
-    ) {
-      // do something
+      // this date is selected, the selected date is hovered, and
     } else if (
       this.props.date > this.props.dateSelected &&
-      this.props.date <= this.props.dateSelected + this.props.minimum_stay &&
+      this.props.date <=
+        this.props.dateSelected + this.props.minimum_stay + 1 &&
       this.props.dateSelectedIsHovered
     ) {
       //if this.date > this.dateSelected &&  this.date < this. dateSelected + minimum state
@@ -95,10 +113,24 @@ class DateCell extends React.Component {
       return 'hover-selected-calendar-day';
     } else if (
       this.props.date > this.props.dateSelected &&
+      // this.props.date > this.props.dateSelected + this.props.minimum_stay &&
+      this.props.date < this.props.dateHovered
+    ) {
+      return 'hover-selected-calendar-day';
+    } else if (
+      this.props.date > this.props.dateSelected &&
       this.state.hover &&
       this.props.date > this.props.dateSelected + this.props.minimum_stay
     ) {
       return 'hover-selected-calendar-day';
+    } else if (
+      this.props.date > this.props.dateSelected &&
+      this.state.hover &&
+      this.props.date <= this.props.dateSelected + this.props.minimum_stay
+    ) {
+      return 'unavailable-calendar-day';
+
+      // Date comes before the selected date
     } else {
       return 'available-unselected-calendar-day';
     }
@@ -120,25 +152,32 @@ class DateCell extends React.Component {
             let dateSelected = this.props.date;
             this.hoverOn();
             this.props.updateDateSelectedIsHovered(dateSelected, true);
+            this.props.updateDateHovered(this.props.date);
           }}
           onMouseLeave={() => {
             let dateSelected = this.props.date;
             this.hoverOff();
             this.props.updateDateSelectedIsHovered(dateSelected, false);
+            this.props.updateDateHovered(false);
           }}
           onClick={() => {
-            this.onClick();
-            this.props.date1Clicked();
-            this.props.updateCalendar(
-              JSON.stringify(!this.state.selected),
-              this.props.date,
-            );
-            if (!this.state.selected) {
-              this.props.updateDateSelected(this.props.date);
-            } else if (this.state.selected) {
-              this.props.updateDateSelected(undefined);
+            if (!this.props.oneSelected) {
+              this.onClick();
+              this.props.date1Clicked();
+              this.props.updateCalendar(
+                JSON.stringify(!this.state.selected),
+                this.props.date,
+              );
+              if (!this.state.selected) {
+                this.props.updateDateSelected(this.props.date);
+              } else if (this.state.selected) {
+                this.props.updateDateSelected(undefined);
+              }
+              this.props.updateDateSelectedIsHovered(this.props.date, true);
+            } else if (this.props.oneSelected) {
+              // record second click, update state in App,
+              this.onClick();
             }
-            this.props.updateDateSelectedIsHovered(this.props.date, true);
           }}
         >
           {this.props.date}
