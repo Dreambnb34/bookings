@@ -14,7 +14,7 @@ class Header extends React.Component {
 
     return (
       <div className="availability-header">
-        <h3>Availability</h3>
+        <h3 data-testid="availability-h3">Availability</h3>
         <span data-testid="minimum-stay">
           {minimum_stay} night minimum stay
         </span>
