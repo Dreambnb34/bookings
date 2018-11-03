@@ -23,7 +23,9 @@ it('should have a table and th element with text content of "Su', () => {
 
 it('should render out a date cell for Noverber 11', () => {
   const { getByTestId } = render(<Calendar month={10} year={2018} />);
-  expect(getByTestId('date-cell-11')).toHaveTextContent(11);
+  expect(getByTestId('available-unselected-calendar-day')).toHaveTextContent(
+    11,
+  );
 });
 
 it('should render a div with the role button', () => {
