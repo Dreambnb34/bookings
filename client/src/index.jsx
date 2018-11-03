@@ -158,29 +158,29 @@ class App extends React.Component {
           leftMount={true}
           year={this.state.leftYear}
           month={this.state.leftMonth}
-          // updateMonth={this.decrementMonth}
-          // bookings={this.state.leftBookings}
-          // minimum_stay={this.state.minimum_stay}
-          // getBookings={this.getBookings}
-          // oneSelected={this.state.oneSelected}
-          // dateSelected={this.state.dateSelected}
-          // incrementSelectedDate={this.incrementSelectedDate}
-          // dateSelectedIsHovered={this.state.dateSelectedIsHovered}
-          // date1Clicked={this.date1Clicked}
+          updateMonth={this.decrementMonth}
+          bookings={this.state.leftBookings}
+          minimum_stay={this.state.minimum_stay}
+          getBookings={this.getBookings}
+          oneSelected={this.state.oneSelected}
+          dateSelected={this.state.dateSelected}
+          incrementSelectedDate={this.incrementSelectedDate}
+          dateSelectedIsHovered={this.state.dateSelectedIsHovered}
+          date1Clicked={this.date1Clicked}
         />
         <Calendar
           leftMount={false}
           year={this.state.rightYear}
           month={this.state.rightMonth}
-          // updateMonth={this.incrementMonth}
-          // bookings={this.state.rightBookings}
-          // minimum_stay={this.state.minimum_stay}
-          // getBookings={this.getBookings}
-          // oneSelected={false}
-          // dateSelected={undefined}
-          // incrementSelectedDate={this.incrementSelectedDate}
-          // dateSelectedIsHovered={this.state.dateSelectedIsHovered}
-          // date1Clicked={this.date1Clicked}
+          updateMonth={this.incrementMonth}
+          bookings={this.state.rightBookings}
+          minimum_stay={this.state.minimum_stay}
+          getBookings={this.getBookings}
+          oneSelected={false}
+          dateSelected={undefined}
+          incrementSelectedDate={this.incrementSelectedDate}
+          dateSelectedIsHovered={this.state.dateSelectedIsHovered}
+          date1Clicked={this.date1Clicked}
         />
       </div>
     );
