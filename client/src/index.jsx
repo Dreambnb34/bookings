@@ -65,6 +65,8 @@ class App extends React.Component {
       }
     });
 
+    console.log('left bookings: ', left);
+
     right = right.map(b => new Date(b.check_in).getDate());
 
     this.setState({
@@ -168,6 +170,20 @@ class App extends React.Component {
           dateSelectedIsHovered={this.state.dateSelectedIsHovered}
           date1Clicked={this.date1Clicked}
         />
+        {/* <Calendar
+          leftMount={true}
+          year={2018}
+          month={10}
+          updateMonth={this.decrementMonth}
+          bookings={this.state.leftBookings}
+          minimum_stay={4}
+          getBookings={this.getBookings}
+          oneSelected={false}
+          dateSelected={32}
+          incrementSelectedDate={this.incrementSelectedDate}
+          dateSelectedIsHovered={this.state.dateSelectedIsHovered}
+          date1Clicked={this.date1Clicked}
+        /> */}
         <Calendar
           leftMount={false}
           year={this.state.rightYear}

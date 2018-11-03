@@ -98,7 +98,7 @@ class Calendar extends React.Component {
   updateDateSelectedIsHovered(date, boolean) {
     if (date && date === this.state.dateSelected) {
       this.setState({
-        updateDateSelectedIsHovered: boolean,
+        dateSelectedIsHovered: boolean,
       });
       this.props.incrementSelectedDate(
         this.props.leftMount,
@@ -193,7 +193,8 @@ class Calendar extends React.Component {
     if (this.props.leftMount) {
       return (
         <button
-          id="left-button"
+          data-testid="calendar-left-button"
+          id="left-button-div"
           onClick={() => {
             this.props.updateMonth();
             this.props.getBookings();
@@ -210,7 +211,8 @@ class Calendar extends React.Component {
   renderRightButton() {
     if (this.props.leftMount === false) {
       return (
-        <div
+        <button
+          data-testid="calendar-right-button"
           id="right-button-div"
           onClick={() => {
             this.props.updateMonth();
@@ -218,7 +220,7 @@ class Calendar extends React.Component {
           }}
         >
           right
-        </div>
+        </button>
       );
     } else {
       return <span />;
@@ -229,22 +231,22 @@ class Calendar extends React.Component {
     let dates = this.renderDates();
     let header = this.renderHeader();
     return (
-      <div className="calendar-container">
-        <div role="button">
+      <div data-testid="calendar-container" className="calendar-container">
+        <div data-testid="calendar-button" role="button">
           {this.renderLeftButton()}
           {this.renderRightButton()}
         </div>
-        <h3 className="calendar-header">
+        <h3 data-testid="calendar-header" className="calendar-header">
           {header} {this.state.year}
         </h3>
-        <table className="calendar-table">
-          <th>Su</th>
-          <th>Mo</th>
-          <th>Tu</th>
-          <th>We</th>
-          <th>Th</th>
-          <th>Fr</th>
-          <th>Sa</th>
+        <table data-testid="calendar-table" className="calendar-table">
+          <th data-testid="calendar-table-th-Su">Su</th>
+          <th data-testid="calendar-table-th-Mo">Mo</th>
+          <th data-testid="calendar-table-th-Tu">Tu</th>
+          <th data-testid="calendar-table-th-We">We</th>
+          <th data-testid="calendar-table-th-Th">Th</th>
+          <th data-testid="calendar-table-th-Fr">Fr</th>
+          <th data-testid="calendar-table-th-Sa">Sa</th>
           <tbody>{dates}</tbody>
         </table>
       </div>
