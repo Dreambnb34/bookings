@@ -40,6 +40,7 @@ class App extends React.Component {
   getBookings() {
     let id = Number(window.location.href.split('/')[4]);
     axios.get(`/api/rooms/${id}`).then(data => {
+      console.log(data);
       this.sortBookings(data);
     });
   }
