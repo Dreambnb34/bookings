@@ -116,13 +116,13 @@ class DateCell extends React.Component {
     } else if (
       this.props.date > this.props.dateSelected &&
       this.state.hover &&
-      this.props.date > this.props.dateSelected + this.props.minimum_stay + 1
+      this.props.date >= this.props.dateSelected + this.props.minimum_stay + 1
     ) {
       // when date is greater than selected date, hovered, and greater than minimum
       return 'hover-selected-calendar-day';
     } else if (
       this.props.date > this.props.dateSelected &&
-      // this.state.hover &&
+      this.state.hover &&
       this.props.date < this.props.dateSelected + this.props.minimum_stay + 1
     ) {
       //when date is greater than selected date, hovered, and less than minimum
@@ -151,10 +151,18 @@ class DateCell extends React.Component {
       this.props.unavailable ||
       this.renderClass() === 'unavailable-calendar-day'
     ) {
-      return <td className="unavailable-calendar-day">{this.props.date}</td>;
+      return (
+        <td
+          data-testid={`unavailable-calendar-day-${this.props.date}`}
+          className="unavailable-calendar-day"
+        >
+          {this.props.date}
+        </td>
+      );
     } else if (this.props.available && this.props.selected === false) {
       return (
         <td
+          data-testid={`${this.renderClass()}-${this.props.date}`}
           className={this.renderClass()}
           onMouseEnter={() => {
             this.hoverOn();
