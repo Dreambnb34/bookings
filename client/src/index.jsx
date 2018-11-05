@@ -39,7 +39,7 @@ class App extends React.Component {
 
   getBookings() {
     let id = Number(window.location.href.split('/')[4]);
-    axios.get(`/api/rooms/${id}`).then(data => {
+    axios.get(`/api/availability/${id}`).then(data => {
       console.log(data);
       this.sortBookings(data);
     });
@@ -204,4 +204,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('availability'));
+window.bookings = App;
+// ReactDOM.render(<App />, document.getElementById('availability'));
