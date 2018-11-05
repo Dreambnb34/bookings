@@ -1,6 +1,6 @@
 // const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
-const css = require('./test.css').toString();
+// const css = require('./test.css').toString();
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
