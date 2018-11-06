@@ -10,7 +10,7 @@ const port = 1338;
 app
   .use(bodyParser.json())
   .use(morgan('dev'))
-  .use('/rooms', express.static(path.join(__dirname, '../client/dist')))
+  .use('/availability', express.static(path.join(__dirname, '../client/dist')))
   .use('/rooms', routes)
   .use('/', routes);
 

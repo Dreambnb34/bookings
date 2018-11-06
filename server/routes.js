@@ -14,7 +14,7 @@ router.get('/:roomId', (req, res) => {
 });
 
 // define a route to grab all bookings for a room
-router.get('/api/rooms/:roomId', (req, res) => {
+router.get('/api/availability/:roomId', (req, res) => {
   const { roomId } = req.params;
   controller
     .selectBookingsById(roomId)
