@@ -202,7 +202,7 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+// export default App;
 
-// window.bookings = App;
+window.bookings = App;
 // ReactDOM.render(<App />, document.getElementById('availability'));

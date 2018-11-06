@@ -1,12 +1,15 @@
 const express = require('express');
 const path = require('path');
-const moment = require('moment');
+const cors = require('cors');
 
 const controller = require('./controller');
+
 const router = express.Router();
 
+router.options('*', cors());
+
 // define the home page route
-router.get('/:roomId', (req, res) => {
+router.get('http://localhost:1338/rooms/:roomId', (req, res) => {
   console.log('getting');
   res.sendFile('index.html', {
     root: path.join(__dirname, '../client/dist'),
@@ -50,6 +53,8 @@ router.get('/api/availability/:roomId', (req, res) => {
 
       controller.selectRoomById(roomId).then(room_data => {
         finalClientObj['room_info'] = room_data;
+        res.set('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin');
         res.send(finalClientObj);
       });
     })

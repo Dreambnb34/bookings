@@ -10,10 +10,16 @@ const port = 1338;
 app
   .use(bodyParser.json())
   .use(morgan('dev'))
-  .use('/availability', express.static(path.join(__dirname, '../client/dist')))
-  .use('/rooms', routes)
+  .use('/rooms/bundle.js', (req, res) => {
+    console.log('bundle requested');
+    res.status(200).sendFile(path.join(__dirname, '../client/dist/bundle.js'));
+  })
+  .use(express.static(path.join(__dirname, '../client/dist/')))
+  // .use('/rooms', routes)
   .use('/', routes);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+module.exports = app;
