@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Header from './components/Header.jsx';
 import Calendar from './components/Calendar.jsx';
 import axios from 'axios';
@@ -203,6 +202,7 @@ class App extends React.Component {
     );
   }
 }
+export default App;
 
-window.bookings = App;
+// window.bookings = App;
 // ReactDOM.render(<App />, document.getElementById('availability'));
