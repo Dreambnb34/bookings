@@ -22,11 +22,11 @@ router.get('/api/availability/:roomId', (req, res) => {
   controller
     .selectBookingsById(roomId)
     .then(data => {
-      console.log('then 1');
+      // console.log('then 1');
       return data;
     })
     .then(bookings => {
-      console.log('then 2');
+      // console.log('then 2');
       // construct object to send client
       const sendToClient = [];
       bookings.forEach(booking => {
@@ -40,8 +40,7 @@ router.get('/api/availability/:roomId', (req, res) => {
       return Promise.all(sendToClient);
     })
     .then(clientObjects => {
-      console.log('then 3');
-
+/
       // clientObjects is array of bookings
       const finalClientObj = {};
       finalClientObj['data'] = clientObjects;
@@ -54,13 +53,13 @@ router.get('/api/availability/:roomId', (req, res) => {
       controller.selectRoomById(roomId).then(room_data => {
         finalClientObj['room_info'] = room_data;
         res.set('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin');
+        // res.setHeader('Access-Control-Allow-Origin');
         res.send(finalClientObj);
       });
     })
     .then(finalClientObj => {
-      console.log('yay');
-      console.log(finalClientObj);
+      // console.log('yay');
+      // console.log(finalClientObj);
     });
 });
 
