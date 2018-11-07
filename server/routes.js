@@ -10,7 +10,7 @@ router.options('*', cors());
 
 // define the home page route
 router.get('http://localhost:1338/rooms/:roomId', (req, res) => {
-  console.log('getting');
+  // console.log('getting');
   res.sendFile('index.html', {
     root: path.join(__dirname, '../client/dist'),
   });
@@ -40,7 +40,8 @@ router.get('/api/availability/:roomId', (req, res) => {
       return Promise.all(sendToClient);
     })
     .then(clientObjects => {
-/
+      // console.log('then 3');
+
       // clientObjects is array of bookings
       const finalClientObj = {};
       finalClientObj['data'] = clientObjects;
@@ -58,7 +59,7 @@ router.get('/api/availability/:roomId', (req, res) => {
       });
     })
     .then(finalClientObj => {
-      // console.log('yay');
+      console.log('yay');
       // console.log(finalClientObj);
     });
 });
