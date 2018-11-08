@@ -119,7 +119,7 @@
 }
 
 #left-button-div {
-  background-image: url('../assets/image-of-an-arrow-9.jpg');
+  /* background-image: url('../assets/image-of-an-arrow-9.jpg'); */
   background-repeat: no-repeat;
   cursor: pointer;
   text-align: center;
@@ -129,7 +129,7 @@
 }
 
 #right-button-div {
-  background: url('../assets/image-of-an-arrow-9.jpg') no-repeat;
+  /* background: url('../assets/image-of-an-arrow-9.jpg') no-repeat; */
   background-repeat: no-repeat;
   cursor: pointer;
   text-align: center;
