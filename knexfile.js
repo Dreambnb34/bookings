@@ -10,8 +10,8 @@ module.exports = {
     //   password: "student"
     // }
     connection: {
-      host: 'fec8-availability.chnrg8w18zdf.us-east-2.rds.amazonaws.com',
-      user: 'rohannobis',
+      host: AWS.MYSQL_HOST,
+      user: AWS.MYSQL_USERNAME,
       password: AWS.MYSQL_PASSWORD,
       database: 'availability',
       port: '3306',
