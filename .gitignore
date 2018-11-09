@@ -6,6 +6,9 @@ npm
 npm-debug.log
 node_modules/
 
+#PASSWORD
+aws.js
+
 pids
 *.pid
 logs

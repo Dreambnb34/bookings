@@ -5,7 +5,9 @@ const path = require('path');
 const routes = require('./routes');
 
 const app = express();
-const port = 1338;
+const PORT = 1338;
+const HOST = '0.0.0.0';
+// const port = 1338;
 
 app.get('/availability', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/bundle.js'));
@@ -30,8 +32,8 @@ app
   .use('/rooms', routes)
   .use('/', routes);
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 module.exports = app;
