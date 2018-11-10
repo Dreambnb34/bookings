@@ -1,5 +1,5 @@
 // Update with your config settings.
-const AWS = require('./aws');
+// const AWS = require('./aws');
 
 module.exports = {
   development: {
@@ -10,9 +10,9 @@ module.exports = {
     //   password: "student"
     // }
     connection: {
-      host: AWS.MYSQL_HOST,
-      user: AWS.MYSQL_USERNAME,
-      password: AWS.MYSQL_PASSWORD,
+      host: 'fec8-availability.chnrg8w18zdf.us-east-2.rds.amazonaws.com',
+      user: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
       database: 'availability',
       port: '3306',
     },

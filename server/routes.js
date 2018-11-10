@@ -7,9 +7,9 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.options('*', cors());
-
+router.use(cors());
 // define the home page route
-router.get('http://localhost:1338/rooms/:roomId', (req, res) => {
+router.get('/rooms/:roomId', (req, res) => {
   // console.log('getting');
   res.sendFile('index.html', {
     root: path.join(__dirname, '../client/dist'),

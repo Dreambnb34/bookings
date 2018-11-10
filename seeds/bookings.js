@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       // Inserts seed entries
       let bookingRecords = [];
-      for (let j = 101; j < 200; j++) {
+      for (let j = 1; j < 101; j++) {
         let bookingsPerRoom = faker.random.number({ min: 5, max: 15 });
         for (let b = 0; b < bookingsPerRoom; b++) {
           bookingRecords.push(createBookingRecord(knex, j, j));

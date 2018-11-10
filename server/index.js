@@ -9,9 +9,13 @@ const PORT = 1338;
 const HOST = '0.0.0.0';
 // const port = 1338;
 
-app.get('/availability', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/bundle.js'));
-});
+// app.get('/availability', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/bundle.js'));
+// });
+
+// app.get('/api/availability', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/bundle.js'));
+// });
 
 app
   .use(bodyParser.json())
