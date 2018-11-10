@@ -36,8 +36,8 @@ app
   .use('/rooms', routes)
   .use('/', routes);
 
-app.listen(PORT, HOST, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+// app.listen(PORT, HOST, () => {
+//   console.log(`Listening on port ${PORT}`);
+// });
 
 module.exports = app;
