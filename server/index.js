@@ -5,8 +5,8 @@ const path = require('path');
 const routes = require('./routes');
 
 const app = express();
-const PORT = 1338;
-const HOST = '0.0.0.0';
+// const PORT = 1338;
+// const HOST = '0.0.0.0';
 // const port = 1338;
 
 // app.get('/availability', (req, res) => {

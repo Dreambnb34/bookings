@@ -1,12 +1,10 @@
-// const mysql = require('mysql');
 // const knex = require('knex')({
 //   client: 'mysql',
 //   connection: {
 //     host: 'fec8-availability.chnrg8w18zdf.us-east-2.rds.amazonaws.com',
-//     user: process.env.MYSQL_USERNAME,
-//     password: process.env.MYSQL_PASSWORD,
+//     user: 'rohannobis',
+//     password: 'MTqv2twy98',
 //     database: 'availability',
-//     port: '3306',
 //   },
 // });
 
@@ -20,4 +18,12 @@ const knex = require('knex')({
   },
 });
 
-module.exports = knex;
+const testGet = () => {
+  knex('bookings')
+    .select('*')
+    .then(book => {
+      console.log(book);
+    });
+};
+
+testGet();

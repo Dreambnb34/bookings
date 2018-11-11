@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       let roomRecords = [];
 
-      for (let i = 101; i < 201; i++) {
+      for (let i = 1; i < 101; i++) {
         roomRecords.push(createRoomRecord(knex, i));
       }
 
